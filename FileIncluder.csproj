@@ -5,18 +5,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30424</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C371E806-DCA3-40F0-8E66-521A081200A7}</ProjectGuid>
+    <ProjectGuid>{017D349F-8A68-4177-969D-F6BC8A58CD4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <StartupObject>
     </StartupObject>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>AutoFileInclude</AssemblyName>
+    <AssemblyName>FileIncluder</AssemblyName>
     <DeploymentDirectory>.\bin\</DeploymentDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
-    <OutputPath>.\bin\Debug\</OutputPath>
+    <OutputPath>bin2\Debug\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
@@ -32,10 +32,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <IncrementalBuild>false</IncrementalBuild>
-    <DocumentationFile>AutoFileInclude.xml</DocumentationFile>
+    <DocumentationFile>FileIncluder.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>AutoFileInclude</RootNamespace>
+    <RootNamespace>FileIncluder</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -48,6 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +60,14 @@
     <Compile Include="Connect.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileWatcher.cs" />
+    <Compile Include="IncludeItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -117,10 +126,18 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Addins\AutoFileInclude - For Testing.AddIn">
-      <Link>AutoFileInclude - For Testing.AddIn</Link>
+    <Content Include="..\..\..\Addins\FileIncluder - For Testing.AddIn">
+      <Link>FileIncluder - For Testing.AddIn</Link>
     </Content>
-    <Content Include="AutoFileInclude.AddIn" />
+    <Content Include="FileIncluder.AddIn" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\IncludeItem.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
