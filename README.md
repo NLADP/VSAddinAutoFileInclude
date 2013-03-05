@@ -1,7 +1,7 @@
 VS Add-in AutoFileInclude
 ======================
-When creating a file in a project folder, set focus on the Solution Explorer and you will be prompted to include file in project.
+When creating a file in a project folder, it is listed in the 'Include files' tool window. Include or ignore checked files.
 
 Install:
-Copy the files: AutoFileInclude.AddIn and AutoFileInclude.dll to a local directory and add that directory to:
+Copy the files: FileIncluder.AddIn and FileIncluder.dll to a local directory and add that directory to:
 Tools - Options - Add-in/Macros Security - Add-in file paths
