@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using EnvDTE;
 using EnvDTE80;
 
 namespace FileIncluder
@@ -9,6 +10,7 @@ namespace FileIncluder
     {
         private DTE2 _applicationObject;
         private FileWatcher _fileWatcher;
+        private SolutionEvents solutionEvents;
 
         private delegate void AddListItem(IncludeItem item);
 
@@ -48,7 +50,8 @@ namespace FileIncluder
 
             if (_applicationObject.Solution == null || !_applicationObject.Solution.IsOpen)
             {
-                _applicationObject.Events.SolutionEvents.Opened += SolutionEventsOnOpened;
+                solutionEvents = _applicationObject.Events.SolutionEvents;
+                solutionEvents.Opened += SolutionEventsOnOpened;
             }
             else
             {
@@ -112,7 +115,8 @@ namespace FileIncluder
                     {
                         if (isInclude)
                         {
-                            _applicationObject.Solution.Projects.Item(project.Name).ProjectItems.AddFromFile(file.Name);
+                            var item = _applicationObject.Solution.Projects.Item(project.Name).ProjectItems.AddFromFile(file.Name);
+                            item.Open().Activate();
                         }
                         project.Nodes.Remove(file);
                     }
